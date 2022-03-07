@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "Run.Samples.GrpcPing";
+
+package ping;
+
+import "google/protobuf/timestamp.proto";
+
+service PingService {
+  rpc Send(Request) returns (Response) {}
+  rpc SendUpstream(Request) returns (Response) {}
+}
+
+message Request {
+  string message = 1;
+}
+
+message Pong {
+  int32 index = 1;
+  string message = 2;
+  google.protobuf.Timestamp received_on = 3;
+}
+
+message Response {
+  Pong pong = 1;
+}
